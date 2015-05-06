@@ -3,6 +3,7 @@ require 'csv'
 require 'net/http'
 @pipl_key = "API_KEY_HERE" #Replace this placeholder API Key with your real one
 @pipl_uri = URI('http://api.pipl.com/search/v4/')
+@min_match = 0.9 #Replace this number with whatever you would like the minimum matching rate to be
 csvfile = if ARGV.length > 0
             ARGV[0].to_s
           else
@@ -49,7 +50,7 @@ def get_pipl (line)
   lastName = line[1].to_s
   city = line[2].to_s
   state = line[3].to_s
-  res = Net::HTTP.post_form(@pipl_uri, 'first_name' => firstName, 'last_name' => lastName, 'city' => city, 'state' => state, 'key' => @pipl_key)
+  res = Net::HTTP.post_form(@pipl_uri, 'first_name' => firstName, 'last_name' => lastName, 'city' => city, 'state' => state, 'key' => @pipl_key, 'minimum_match' => @min_match)
 
   puts res.body #Just add a hashtag at the beginning of this line to not "Print to Terminal"
   $outputData += res.body.to_s
