@@ -11,7 +11,7 @@ csvfile = if ARGV.length > 0
           end
 @country = "US" #This is the default country, you can replace it with whatever again. Just make sure the country you're referring to has the town specified. 
 $outputFilename = if ARGV.length > 1
-                    ARGV[1].to_s
+                    ARGV[1].to_s.strip
                   else
                     "output.json" #Replace this with the desired default input filename/path + .json or .txt ( if you want )
                   end
